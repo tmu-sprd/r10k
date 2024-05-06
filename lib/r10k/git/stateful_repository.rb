@@ -63,6 +63,7 @@ class R10K::Git::StatefulRepository
       if force
         logger.warn(_("Overwriting local modifications to %{repo_path}") % {repo_path: @repo.path})
         logger.debug(_("Updating %{repo_path} to %{ref}") % {repo_path: @repo.path, ref: ref })
+        @repo.prune
         @repo.checkout(sha, {:force => force})
       else
         logger.warn(_("Skipping %{repo_path} due to local modifications") % {repo_path: @repo.path})

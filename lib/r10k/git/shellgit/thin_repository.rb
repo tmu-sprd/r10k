@@ -34,6 +34,11 @@ class R10K::Git::ShellGit::ThinRepository < R10K::Git::ShellGit::WorkingReposito
     git ['fetch', remote, '--prune', '--tags', '--prune-tags'], :path => @path.to_s
   end
 
+  # Prune deleted branches
+  def prune
+    git ['fetch', '--prune'], :path => @path.to_s
+  end
+
   # @return [String] The origin remote URL
   def cache
     git(['config', '--get', 'remote.cache.url'], :path => @path.to_s, :raise_on_fail => false).stdout
